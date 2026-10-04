@@ -1,7 +1,7 @@
-From f0b2bb58d5a7c6c2d91f15c15b5822ae37e524af Mon Sep 17 00:00:00 2001
+From 92b635289373bd81fbcbe70661679be639409383 Mon Sep 17 00:00:00 2001
 From: Chih-Wei Huang <cwhuang@linux.org.tw>
 Date: Fri, 27 Feb 2026 09:40:31 +0000
-Subject: [PATCH 1/2] Add information about OpenGL driver version
+Subject: [PATCH] Add information about OpenGL driver version
 
 In order to get Mesa / OpenGL ES info, an EGL context is required.
 Without it, GLES20.glGetString returns NULL.
@@ -44,7 +44,7 @@ index d444008..184ec92 100644
      <string name="module_version" msgid="1787518340082046658">"Google Play 系統更新"</string>
      <string name="battery_info" msgid="7873528123969546728">"電池資訊"</string>
 diff --git a/res/values/strings.xml b/res/values/strings.xml
-index ccc591f..304fcd3 100644
+index 04c06e3..11e84e2 100644
 --- a/res/values/strings.xml
 +++ b/res/values/strings.xml
 @@ -3626,6 +3626,8 @@
@@ -57,10 +57,10 @@ index ccc591f..304fcd3 100644
      <!-- About phone screen, tapping this button will take user to a seperate UI to check Google Play system update [CHAR LIMIT=60] -->
      <string name="module_version">Google Play system update</string>
 diff --git a/res/xml/firmware_version.xml b/res/xml/firmware_version.xml
-index 41f7733..5110cff 100644
+index 76a6f0a..8a4ca08 100644
 --- a/res/xml/firmware_version.xml
 +++ b/res/xml/firmware_version.xml
-@@ -63,6 +63,15 @@
+@@ -93,6 +93,15 @@
          settings:enableCopying="true"
          settings:controller="com.android.settings.deviceinfo.firmwareversion.KernelVersionPreferenceController"/>
  
@@ -73,9 +73,9 @@ index 41f7733..5110cff 100644
 +        settings:enableCopying="true"
 +        settings:controller="com.android.settings.deviceinfo.firmwareversion.OpenGLVersionPreferenceController"/>
 +
-     <!-- Build -->
+     <!-- Build date -->
      <Preference
-         android:key="os_build_number"
+         android:key="os_build_date"
 diff --git a/src/com/android/settings/deviceinfo/firmwareversion/FirmwareVersionScreen.kt b/src/com/android/settings/deviceinfo/firmwareversion/FirmwareVersionScreen.kt
 index 1af3fb6..273b0b6 100644
 --- a/src/com/android/settings/deviceinfo/firmwareversion/FirmwareVersionScreen.kt
@@ -254,6 +254,3 @@ index 0000000..bb950cd
 +        }
 +    }
 +}
--- 
-2.55.0
-

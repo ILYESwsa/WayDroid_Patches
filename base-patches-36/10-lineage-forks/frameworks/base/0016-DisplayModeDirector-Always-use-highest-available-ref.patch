@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 871e20d40a23968eba72dc812e8c5a1ce6f97a6e Mon Sep 17 00:00:00 2001
 From: SupeChicken666 <me@supechicken666.dev>
 Date: Sat, 16 May 2026 00:05:21 +0800
-Subject: [PATCH 16/22] DisplayModeDirector: Always use highest available
- refresh rate
+Subject: [PATCH] DisplayModeDirector: Always use highest available refresh
+ rate
 
 Signed-off-by: SupeChicken666 <me@supechicken666.dev>
 ---
@@ -10,19 +10,19 @@ Signed-off-by: SupeChicken666 <me@supechicken666.dev>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
-index b1444835..86e6b87b 100644
+index 9e606a2e7..5463f657d 100644
 --- a/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
 +++ b/services/core/java/com/android/server/display/mode/DisplayModeDirector.java
-@@ -1168,7 +1168,7 @@ public class DisplayModeDirector {
+@@ -1182,7 +1182,7 @@ public class DisplayModeDirector {
  
              float minRefreshRate = Settings.System.getFloatForUser(cr,
-                     Settings.System.MIN_REFRESH_RATE, 0f, UserHandle.USER_CURRENT);
+                     Settings.System.MIN_REFRESH_RATE, 60f, UserHandle.USER_CURRENT);
 -            if (Float.isInfinite(minRefreshRate)) {
 +            if (true /* Float.isInfinite(minRefreshRate) */) {
                  // Infinity means that we want the highest possible refresh rate
                  minRefreshRate = highestRefreshRate;
              }
-@@ -1176,7 +1176,7 @@ public class DisplayModeDirector {
+@@ -1190,7 +1190,7 @@ public class DisplayModeDirector {
              float peakRefreshRate = Settings.System.getFloatForUser(cr,
                      Settings.System.PEAK_REFRESH_RATE, mDefaultPeakRefreshRate,
                      UserHandle.USER_CURRENT);

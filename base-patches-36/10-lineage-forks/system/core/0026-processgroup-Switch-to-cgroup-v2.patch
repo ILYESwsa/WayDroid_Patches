@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From b8b8acf7540fcab52ddee932bfb32602520a2f53 Mon Sep 17 00:00:00 2001
 From: SupeChicken666 <me@supechicken666.dev>
 Date: Sat, 23 May 2026 20:47:04 +0800
-Subject: [PATCH 26/33] processgroup: Switch to cgroup v2
+Subject: [PATCH] processgroup: Switch to cgroup v2
 
 This allow processgroup to work on recent Linux distros
 
@@ -71,7 +71,7 @@ index e9345a5..058bf7f 100644
          "Controller": "memory",
          "Path": ".",
 diff --git a/libprocessgroup/profiles/task_profiles.json b/libprocessgroup/profiles/task_profiles.json
-index 1d23d9c..738902c 100644
+index 35c0043..b5274d1 100644
 --- a/libprocessgroup/profiles/task_profiles.json
 +++ b/libprocessgroup/profiles/task_profiles.json
 @@ -92,16 +92,7 @@
@@ -549,9 +549,9 @@ index 1d23d9c..738902c 100644
            "Params":
            {
              "Controller": "cpuset",
--            "Path": "system-background"
+-            "Path": "foreground"
 +            "Interface": "cpus",
-+            "PropertyName": "ro.cgroup2.cpuset.efficient",
++            "PropertyName": "ro.cgroup2.cpuset.default",
 +            "DefaultValue": ""
            }
          }
@@ -565,9 +565,9 @@ index 1d23d9c..738902c 100644
            "Params":
            {
              "Controller": "cpuset",
--            "Path": "system-background"
+-            "Path": "foreground"
 +            "Interface": "cpus",
-+            "PropertyName": "ro.cgroup2.cpuset.efficient",
++            "PropertyName": "ro.cgroup2.cpuset.default",
 +            "DefaultValue": ""
            }
          }

@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 1e7f97a6d8f594827b3c3e9f6549008e05cec6a8 Mon Sep 17 00:00:00 2001
 From: jingjiezhuang <jingjie.zhuang@igg.com>
 Date: Mon, 11 May 2026 21:52:44 +0800
-Subject: [PATCH 06/22] clipboard: Talk with waydroid host service to get
- clipboard synchronized
+Subject: [PATCH] clipboard: Talk with waydroid host service to get clipboard
+ synchronized
 
 Co-authored-by: SupeChicken666 <me@supechicken666.dev>
 Change-Id: I1d46306ada5967e27d568284e477eb0c88150016
@@ -12,7 +12,7 @@ Change-Id: I1d46306ada5967e27d568284e477eb0c88150016
  2 files changed, 16 insertions(+)
 
 diff --git a/services/core/java/com/android/server/clipboard/ClipboardService.java b/services/core/java/com/android/server/clipboard/ClipboardService.java
-index fe037070..5791cd9a 100644
+index 80f3cece3..d49d3f434 100644
 --- a/services/core/java/com/android/server/clipboard/ClipboardService.java
 +++ b/services/core/java/com/android/server/clipboard/ClipboardService.java
 @@ -123,6 +123,8 @@ import java.util.List;
@@ -24,7 +24,7 @@ index fe037070..5791cd9a 100644
  /**
   * Implementation of the clipboard for copy and paste.
   * <p>
-@@ -176,6 +178,7 @@ public class ClipboardService extends SystemService {
+@@ -163,6 +165,7 @@ public class ClipboardService extends SystemService {
      private final IBinder mPermissionOwner;
      private final Consumer<ClipData> mClipboardMonitor;
      private final Handler mWorkerHandler;
@@ -32,7 +32,7 @@ index fe037070..5791cd9a 100644
  
      @GuardedBy("mLock")
      // Maps (userId, deviceId) to Clipboard.
-@@ -245,6 +248,7 @@ public class ClipboardService extends SystemService {
+@@ -232,6 +235,7 @@ public class ClipboardService extends SystemService {
          HandlerThread workerThread = new HandlerThread(TAG);
          workerThread.start();
          mWorkerHandler = workerThread.getThreadHandler();
@@ -40,7 +40,7 @@ index fe037070..5791cd9a 100644
      }
  
      @Override
-@@ -941,6 +945,11 @@ public class ClipboardService extends SystemService {
+@@ -931,6 +935,11 @@ public class ClipboardService extends SystemService {
              clipboard = new Clipboard(userId, deviceId);
              mClipboards.add(userId, deviceId, clipboard);
          }
@@ -52,7 +52,7 @@ index fe037070..5791cd9a 100644
          return clipboard;
      }
  
-@@ -1078,6 +1087,10 @@ public class ClipboardService extends SystemService {
+@@ -1068,6 +1077,10 @@ public class ClipboardService extends SystemService {
              if (description != null) {
                  description.setTimestamp(System.currentTimeMillis());
              }
@@ -64,13 +64,13 @@ index fe037070..5791cd9a 100644
          sendClipChangedBroadcast(clipboard);
      }
 diff --git a/services/proguard.flags b/services/proguard.flags
-index b10aa7ef..dbc5ef71 100644
+index 7059296d8..4c608e3b6 100644
 --- a/services/proguard.flags
 +++ b/services/proguard.flags
-@@ -138,3 +138,6 @@
- -keep,allowoptimization,allowaccessmodification class lineageos.** { *; }
- -keep,allowoptimization,allowaccessmodification class org.lineageos.** { *; }
- -keep,allowoptimization,allowaccessmodification class vendor.lineage.** { *; }
+@@ -141,3 +141,6 @@
+ 
+ # Evolution X
+ -keep,allowoptimization,allowaccessmodification class com.android.server.EvolutionSystemExService { *; }
 +
 +# Waydroid
 +-dontwarn vendor.waydroid.**

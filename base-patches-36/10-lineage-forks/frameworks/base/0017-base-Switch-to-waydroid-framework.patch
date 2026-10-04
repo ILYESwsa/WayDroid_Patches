@@ -1,22 +1,22 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0bc8e42d29e1e3debe37d8cb5316820646a423c4 Mon Sep 17 00:00:00 2001
 From: Erfan Abdi <erfangplus@gmail.com>
 Date: Wed, 8 Jul 2026 17:31:45 +0800
-Subject: [PATCH 17/22] base: Switch to waydroid framework
+Subject: [PATCH] base: Switch to waydroid framework
 
 Co-authored-by: SupeChicken666 <me@supechicken666.dev>
 ---
- core/res/Android.bp                                         | 1 +
- packages/SystemUI/Android.bp                                | 1 +
- services/Android.bp                                         | 2 ++
- services/core/Android.bp                                    | 1 +
- .../java/com/android/server/clipboard/ClipboardService.java | 2 +-
- .../java/com/android/server/power/PowerManagerService.java  | 2 +-
- services/java/com/android/server/SystemServer.java          | 6 ++++++
- services/proguard.flags                                     | 1 +
- 8 files changed, 14 insertions(+), 2 deletions(-)
+ core/res/Android.bp                                          | 1 +
+ packages/SystemUI/Android.bp                                 | 1 +
+ services/Android.bp                                          | 2 ++
+ services/core/Android.bp                                     | 1 +
+ .../java/com/android/server/clipboard/ClipboardService.java  | 2 +-
+ .../java/com/android/server/power/PowerManagerService.java   | 2 +-
+ services/java/com/android/server/SystemServer.java           | 5 +++++
+ services/proguard.flags                                      | 1 +
+ 8 files changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/core/res/Android.bp b/core/res/Android.bp
-index 46cae5d2..77e6ccac 100644
+index 46cae5d2b..77e6ccaca 100644
 --- a/core/res/Android.bp
 +++ b/core/res/Android.bp
 @@ -141,6 +141,7 @@ android_app {
@@ -28,22 +28,22 @@ index 46cae5d2..77e6ccac 100644
  
      // Create package-export.apk, which other packages can use to get
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
-index b41566be..f721a8f6 100644
+index eca469337..704490414 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
-@@ -592,6 +592,7 @@ android_library {
+@@ -599,6 +599,7 @@ android_library {
          "displaylib",
          "aconfig_settings_flags_lib",
          "vendor.lineage.powershare-V1-java",
 +        "framework-waydroid.static",
+         "FadingEdgeLayoutLib",
+         "commonutils",
      ],
-     javacflags: [
-         "-Aroom.schemaLocation=frameworks/base/packages/SystemUI/schemas",
 diff --git a/services/Android.bp b/services/Android.bp
-index 7d3d37ca..34a4eec4 100644
+index 481694280..f36ca3947 100644
 --- a/services/Android.bp
 +++ b/services/Android.bp
-@@ -155,6 +155,7 @@ filegroup {
+@@ -156,6 +156,7 @@ filegroup {
          ":services.voiceinteraction-sources",
          ":services.wallpapereffectsgeneration-sources",
          ":services.wifi-sources",
@@ -51,7 +51,7 @@ index 7d3d37ca..34a4eec4 100644
          ":framework-pm-common-shared-srcs",
          ":framework-minus-apex-aconfig-srcjars",
      ],
-@@ -361,6 +362,7 @@ java_library {
+@@ -363,6 +364,7 @@ java_library {
          "services.usb",
          "services.voiceinteraction",
          "services.wallpapereffectsgeneration",
@@ -60,19 +60,19 @@ index 7d3d37ca..34a4eec4 100644
          "service-blobstore",
          "service-jobscheduler",
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index 201473ef..ca0ca90b 100644
+index 7ded09739..c97ccda1b 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -253,6 +253,7 @@ java_library_static {
-         "aconfig_adbdauth_flags_java_lib",
+@@ -255,6 +255,7 @@ java_library_static {
          "AvfBuildFlags",
+         "vendor.aospa.biometrics.face",
          "vendor.waydroid.window-V1.2-java",
 +        "framework-waydroid.static",
      ],
      javac_shard_size: 50,
      javacflags: [
 diff --git a/services/core/java/com/android/server/clipboard/ClipboardService.java b/services/core/java/com/android/server/clipboard/ClipboardService.java
-index 5791cd9a..72eb2b97 100644
+index d49d3f434..bdfe96b48 100644
 --- a/services/core/java/com/android/server/clipboard/ClipboardService.java
 +++ b/services/core/java/com/android/server/clipboard/ClipboardService.java
 @@ -123,7 +123,7 @@ import java.util.List;
@@ -85,7 +85,7 @@ index 5791cd9a..72eb2b97 100644
  /**
   * Implementation of the clipboard for copy and paste.
 diff --git a/services/core/java/com/android/server/power/PowerManagerService.java b/services/core/java/com/android/server/power/PowerManagerService.java
-index c0e323e2..cfe54072 100644
+index e6791d4f1..29bc72a28 100644
 --- a/services/core/java/com/android/server/power/PowerManagerService.java
 +++ b/services/core/java/com/android/server/power/PowerManagerService.java
 @@ -160,7 +160,7 @@ import com.android.server.wm.WindowManagerInternal;
@@ -98,19 +98,18 @@ index c0e323e2..cfe54072 100644
  import java.io.FileDescriptor;
  import java.io.PrintWriter;
 diff --git a/services/java/com/android/server/SystemServer.java b/services/java/com/android/server/SystemServer.java
-index a184d6a7..8297f19a 100644
+index b2d145443..00924c130 100644
 --- a/services/java/com/android/server/SystemServer.java
 +++ b/services/java/com/android/server/SystemServer.java
-@@ -339,6 +339,8 @@ import java.util.TreeSet;
- import java.util.concurrent.CountDownLatch;
+@@ -349,6 +349,7 @@ import java.util.concurrent.CountDownLatch;
  import java.util.concurrent.Future;
  
+ import com.android.server.EvolutionSystemExService;
 +import id.waydro.server.WaySystemServer;
-+
+ 
  /**
   * Entry point to {@code system_server}.
-  */
-@@ -3125,6 +3127,10 @@ public final class SystemServer implements Dumpable {
+@@ -3211,6 +3212,10 @@ public final class SystemServer implements Dumpable {
              reportWtf("Making " + externalServer + " ready", e);
          }
  
@@ -122,10 +121,10 @@ index a184d6a7..8297f19a 100644
  
          t.traceBegin("MakeLockSettingsServiceReady");
 diff --git a/services/proguard.flags b/services/proguard.flags
-index dbc5ef71..aa97e14b 100644
+index 4c608e3b6..acd464d0a 100644
 --- a/services/proguard.flags
 +++ b/services/proguard.flags
-@@ -141,3 +141,4 @@
+@@ -144,3 +144,4 @@
  
  # Waydroid
  -dontwarn vendor.waydroid.**

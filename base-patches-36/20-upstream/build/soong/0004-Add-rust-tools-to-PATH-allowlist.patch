@@ -1,7 +1,7 @@
-From 316d76d338d0aff51eafab8de8f7a18f14158f1a Mon Sep 17 00:00:00 2001
+From d81316f3a3228b56864d2026300081cd7d6f47d3 Mon Sep 17 00:00:00 2001
 From: SupeChicken666 <me@supechicken666.dev>
 Date: Tue, 31 Mar 2026 00:45:48 +0000
-Subject: [PATCH 4/5] Add rust tools to PATH allowlist
+Subject: [PATCH] Add rust tools to PATH allowlist
 
 Change-Id: I49d2ad5e1aca04650432ef6f99f147e41c4bdf20
 Signed-off-by: SupeChicken666 <me@supechicken666.dev>
@@ -10,7 +10,7 @@ Signed-off-by: SupeChicken666 <me@supechicken666.dev>
  1 file changed, 4 insertions(+)
 
 diff --git a/ui/build/paths/config.go b/ui/build/paths/config.go
-index 4af7d70..5ecb08b 100644
+index cb70a1a..9c66351 100644
 --- a/ui/build/paths/config.go
 +++ b/ui/build/paths/config.go
 @@ -87,6 +87,8 @@ func GetConfig(name string) PathConfig {
@@ -19,10 +19,10 @@ index 4af7d70..5ecb08b 100644
  	"bash":        Allowed,
 +	"bindgen":     Allowed,
 +	"cbindgen":    Allowed,
+ 	"date":        Allowed,
  	"diff":        Allowed,
  	"dlv":         Allowed,
- 	"expr":        Allowed,
-@@ -104,6 +106,8 @@ var Configuration = map[string]PathConfig{
+@@ -106,6 +108,8 @@ var Configuration = map[string]PathConfig{
  	"perl":        Log,
  	"pstree":      Allowed,
  	"rsync":       Allowed,
@@ -30,7 +30,4 @@ index 4af7d70..5ecb08b 100644
 +	"rustfmt":     Allowed,
  	"sh":          Allowed,
  	"stubby":      Allowed,
- 	"tr":          Allowed,
--- 
-2.55.0
-
+ 	"tar":         Allowed,
