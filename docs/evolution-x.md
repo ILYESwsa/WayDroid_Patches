@@ -48,3 +48,17 @@ script skips it (reverse-apply check).
 - full `mka systemimage vendorimage`
 - soong `module already defined` clashes (run `tools/check-dup-modules.py`)
 - boot on a real Waydroid host
+
+## Build on Crave (no PC needed)
+
+Needs a foss.crave.io account. In the Crave dashboard open Sessions > Create
+Session/Connect (browser terminal, works from a phone), then:
+
+    crave clone list                      # note the project ID of the newest LineageOS (A16) base
+    crave clone create --projectID <ID> /crave-devspaces/evox
+    cd /crave-devspaces/evox
+    crave run --no-patch -- "curl -fsSL https://raw.githubusercontent.com/ILYESwsa/WayDroid_Patches/EvolutionX-bka/tools/crave-evox.sh | bash"
+
+`crave run` queues the build and keeps going if you close the terminal.
+Download system.img / vendor.img from the build page on foss.crave.io
+(they are copied to out/waydroid-images/). Do not repo sync in the devspace itself.
