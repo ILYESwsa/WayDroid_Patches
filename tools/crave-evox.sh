@@ -25,6 +25,8 @@ python3 "$WDP/tools/check-dup-modules.py" "$SRC" --ours "$WDP/manifest/10-waydro
 "$WDP/waydroid-patches.sh" status "$SRC"
 
 repo manifest -o /dev/null
+unset USE_CCACHE CCACHE_EXEC
+export USE_CCACHE=0
 source build/envsetup.sh
 lunch "$TARGET"
 mka systemimage vendorimage
